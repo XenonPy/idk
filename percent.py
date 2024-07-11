@@ -7,7 +7,7 @@ from rich.console import Console
 console = Console()
 import os
 
-seeds = [1, 2, 3, 4] # seed 1: 0-50 seed 2: 50-65 seed 3: 65-80 seed 4: 80-100. Seeds assert academic competence 
+seeds = [1, 2, 3, 4, 5] # seed 1: 20-50 seed 2: 50-65 seed 3: 65-80 seed 4: 80-100. seed 5: 0-30 Seeds assert academic competence 
 
 benchmark_level = int(IntPrompt.ask("Please enter the number of students to benchmark", default="10")) # You can benchmark the script by choosing a custom or preset benchmark level
 gradebook = {
@@ -24,13 +24,15 @@ def generate_dataset(): # ngl snake case is kind of ugly
         seed = random.choice(seeds)
         for grades in range (1, 6):
             if seed == 1:
-                grade = random.randint(0, 50)
+                grade = random.randint(20, 50)
             elif seed == 2:
                 grade = random.randint(50, 65)
             elif seed == 3:
                 grade = random.randint(65, 80)
             elif seed == 4:
                 grade = random.randint(80, 100)
+            elif seed == 5:
+                grade = random.randint(0, 30)
             else:
                 print("ERROR! Determining grade using seed")
                 exit()
@@ -70,4 +72,4 @@ while True:
     
 
 console.print(f"\nSummary | Time to run: {end-start} | Overall average grade: {total_avg / total_div}\n")
-console.print(f"\nBenchmarked Data: [red bold]gradebook.json\n")
+console.print(f"\nBenchmarked Data: [red bold]gradebook{filen}.json\n")
